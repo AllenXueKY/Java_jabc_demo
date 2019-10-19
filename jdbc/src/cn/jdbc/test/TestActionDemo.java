@@ -4,8 +4,7 @@ import cn.jdbc.action.TestAction;
 import cn.jdbc.model.Test;
 
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 测试控制层
@@ -13,14 +12,7 @@ import java.util.List;
 public class TestActionDemo {
     public static void main(String[] args) throws SQLException {
         TestAction testAction = new TestAction();
-
-
-        List<Test> result = testAction.query();
-        for (int i = 0; i < result.size(); i++) {
-            System.out.println(result.get(i).getId()+
-                    ":" +result.get(i).getUser_name() );
-        }/*查询*/
-//        Test test = new Test();
+        Test test = new Test();
 //
 //        test.setUser_name("小园");
 //        test.setSex(2);
@@ -30,7 +22,21 @@ public class TestActionDemo {
 //        test.setMobile("13572566666");
 //        test.setIsdel(0);
 //        test.setId(6);
-//       // testAction.add(test);
+//        testAction.add(test);
 //        testAction.edit(test);
+//        testAction.del(1);
+        List<Map<String,Object>> params = new ArrayList<Map<String,Object>>();
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("name","user_name");
+        map.put("rela","=");
+        map.put("value","'宣宣'");
+
+        params.add(map);
+
+        List<Test> result = testAction.query(params);
+        for (int i = 0; i < result.size(); i++) {
+            System.out.println(result.get(i).getId()+
+                    ":" +result.get(i).getUser_name() );
+        }/*查询*/
     }
 }
